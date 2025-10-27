@@ -1,13 +1,31 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-st.set_page_config(page_title="HTML Preview", layout="wide")
+# Page configuration (fullscreen, no menu)
+st.set_page_config(
+    page_title="",
+    page_icon="",
+    layout="wide",      # Full width
+    initial_sidebar_state="collapsed"
+)
 
-st.title("🌐 My HTML Page")
+# Hide Streamlit header/footer
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+body {margin:0; padding:0;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# index.html ফাইল ওপেন করে Streamlit এর মধ্যে দেখানো
+# Load HTML content
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-st.components.v1.html(html_content, height=800, scrolling=True)
+# Embed HTML full screen
+components.html(html_content, height=2000, scrolling=False)
+
 
 
